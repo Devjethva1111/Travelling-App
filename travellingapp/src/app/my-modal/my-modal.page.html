@@ -1,0 +1,107 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-button (click)="closeModal()">Cancel</ion-button>
+        </ion-buttons>
+        <ion-title>Notes Model</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-card>
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()" novalidate>
+            <!-- Name Input -->
+            <ion-list>
+                <ion-item lines="full">
+                    <!-- <ion-label position="floating">Name</ion-label> -->
+                    <ion-input formControlName="name" #fname type="text" placeholder="Name"></ion-input>
+                </ion-item>
+            </ion-list>
+            <!-- Name Validation -->
+
+            <span class="error ion-padding" *ngIf="submitted && errorCtr.name.errors?.required && myForm.get('name').touched ">
+Name is required.
+</span>
+
+            <span class="error ion-padding" *ngIf="submitted || errorCtr.name.errors?.minlength ">
+Min 3 chars long.
+</span>
+
+            <span class="error ion-padding" *ngIf="submitted || errorCtr.name.errors?.pattern ">
+Enter Valid Character.
+</span>
+
+            <!-- Date -->
+            <ion-list>
+                <ion-item lines="full">
+                    <!-- <ion-label position="floating">Date</ion-label> -->
+                    <ion-input value="{{ defaultDate | date: 'yyyy-MM-dd' }}" id="date" placeholder="Date"></ion-input>
+                    <ion-popover size="cover" trigger="date" [dismissOnSelect]="true">
+                        <ng-template>
+                            <ion-datetime presentation="date" (ionChange)="getDate($event)" formControlName="dob" [value]="defaultDate" [(ngModel)]="defaultDate"></ion-datetime>
+                        </ng-template>
+                    </ion-popover>
+                </ion-item>
+            </ion-list>
+
+            <!-- Time -->
+
+            <ion-list>
+                <ion-item lines="full">
+                    <ion-input value="{{ defaultTime | date: 'HH:mm' }}" id="time" placeholder="Time"></ion-input>
+                    <ion-popover size="cover" trigger="time" [dismissOnSelect]="true">
+                        <ng-template>
+                            <ion-datetime presentation="time" formControlName="time" [value]="defaultTime" [(ngModel)]="defaultTime"></ion-datetime>
+                        </ng-template>
+                    </ion-popover>
+                </ion-item>
+            </ion-list>
+
+            <!-- Subnotes -->
+            <ion-list>
+                <ion-item fill="outline">
+                    <ion-input formControlName="subname" name="" #uname type="text" class="inputClass" placeholder="Sub name">
+                    </ion-input>
+                    <ion-button (click)="onCreateUser(uname)" class=" btn btn-danger" style="margin: 5px;">Add</ion-button>
+                </ion-item>
+
+                <span class="error ion-padding" *ngIf="submitted && errorCtr.subname.errors?.required && myForm.get('subname').touched ">
+                    Subname is required.
+                    </span>
+
+                <span class="error ion-padding" *ngIf="submitted || errorCtr.subname.errors?.minlength ">
+                    Min 3 chars long.
+                    </span>
+
+                <span class="error ion-padding" *ngIf="submitted || errorCtr.subname.errors?.pattern ">
+                    Enter Valid Character.
+                    </span>
+
+                <ion-card>
+                    <ion-grid class="card">
+                        <ion-row>
+                            <ion-item *ngFor="let recipe of products; let i = index">
+                                <ion-button slot="end" class=" btn btn-danger" (click)="deleteTask(i)" style="margin: 5px;">
+                                    <ion-icon name="trash"></ion-icon>
+                                </ion-button>
+                                <ion-label>
+                                    {{recipe.name}}
+                                </ion-label>
+                            </ion-item>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card>
+            </ion-list>
+
+
+            <!-- Button -->
+            <ion-button type=" submit " color="danger " expand="block " [disabled]="myForm.invalid ">
+                Submit
+            </ion-button>
+
+        </form>
+
+    </ion-card>
+
+</ion-content>

@@ -1,0 +1,10 @@
+{
+  "name": "travellingapp",
+  "integrations": {
+    "capacitor": {
+      "enabled": false
+    },
+    "cordova": {}
+  },
+  "type": "angular"
+}

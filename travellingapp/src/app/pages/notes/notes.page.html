@@ -1,0 +1,26 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-button slot="end" (click)="showModal()">
+            <ion-icon icon name="add"></ion-icon>
+        </ion-button>
+        <ion-title>Notes</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-list>
+        <ion-item *ngIf="data">
+            <ion-label>
+                <ion-label>Name: {{data.name}} </ion-label>
+                Subname:
+                <ion-text *ngFor="let recipes of data.sub_name"> {{recipes.name}}, </ion-text>
+                <ion-label>Date: {{data.dob}}</ion-label>
+                <ion-label>Time: {{data.time | date: 'HH:mm' }}</ion-label>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

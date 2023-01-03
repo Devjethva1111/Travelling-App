@@ -1,0 +1,25 @@
+.container {
+    min-height: 250px;
+}
+
+.img-list {
+    margin: 4px;
+}
+
+@media (min-width: 0px) {
+    .img-list {
+        column-count: 2;
+    }
+}
+
+@media (min-width: 420px) {
+    .img-list {
+        column-count: 3;
+    }
+}
+
+@media (min-width: 720px) {
+    .img-list {
+        column-count: 3;
+    }
+}
